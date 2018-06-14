@@ -1,0 +1,101 @@
+{
+  "project_info": {
+    "project_number": "807277420969",
+    "firebase_url": "https://fitnessapp-30602.firebaseio.com",
+    "project_id": "fitnessapp-30602",
+    "storage_bucket": "fitnessapp-30602.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807277420969:android:57d820540cdccf19",
+        "android_client_info": {
+          "package_name": "com.example.bolinwang.tudar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807277420969-re3mvd60lllqv8tkg84j4caoecmconp5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bolinwang.tudar",
+            "certificate_hash": "debed027da410b4b7be10d20cf1467c637e0ce01"
+          }
+        },
+        {
+          "client_id": "807277420969-93l36nfqcpsard7gc75vjuindvh7l0v9.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "807277420969-93l36nfqcpsard7gc75vjuindvh7l0v9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFSYF8aJ3sg2ExtLLrrGa848j8KpWadgQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807277420969-93l36nfqcpsard7gc75vjuindvh7l0v9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807277420969-fos21ff8jnf5isl4o5l8bjaif89o2me4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "Tudar.FitnessAPP"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807277420969:android:ea92c8cc90b3c7c7",
+        "android_client_info": {
+          "package_name": "com.tudar.fitnessapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807277420969-93l36nfqcpsard7gc75vjuindvh7l0v9.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "807277420969-93l36nfqcpsard7gc75vjuindvh7l0v9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFSYF8aJ3sg2ExtLLrrGa848j8KpWadgQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
