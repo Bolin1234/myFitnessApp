@@ -25,7 +25,7 @@ public class SignUpLogInActivity extends AppCompatActivity {
     private Button signUpButton;
     private Button logInButton;
     private FirebaseAuth auth;
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
