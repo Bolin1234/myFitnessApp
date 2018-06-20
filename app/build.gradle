@@ -27,11 +27,17 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     //library added
+<<<<<<< HEAD
     implementation 'com.google.firebase:firebase-auth:16.0.1'
     //implementation 'com.android.support:design:27.1.1'
     //implementation 'com.google.firebase:firebase-database:16.0.1'
     //implementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.google.firebase:firebase-core:16.0.0'
+=======
+    implementation 'com.google.firebase:firebase-auth:16.0.2'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.android.support:support-v13:27.1.1'
+>>>>>>> parent of dba43b9... Submission Jun/19
 }
 
     apply plugin: 'com.google.gms.google-services'
