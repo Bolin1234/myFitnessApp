@@ -41,9 +41,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.2'
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.android.support:support-v13:27.1.1'
+<<<<<<< HEAD
 >>>>>>> parent of dba43b9... Submission Jun/19
 =======
 >>>>>>> parent of 4b6a2b9... SignUpFinished
+=======
+>>>>>>> parent of dba43b9... Submission Jun/19
 }
 
     apply plugin: 'com.google.gms.google-services'
