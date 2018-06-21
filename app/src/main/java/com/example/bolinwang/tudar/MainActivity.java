@@ -1,9 +1,9 @@
 package com.example.bolinwang.tudar;
 
-<<<<<<< HEAD
+
 //
 import android.support.v7.app.AppCompatActivity;
-=======
+
 /*import android.support.v7.app.AppCompatActivity;
 >>>>>>> parent of 4b6a2b9... SignUpFinished
 import android.os.Bundle;
