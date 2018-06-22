@@ -1,3 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <resources>
     <string name="app_name">Tudar</string>
+    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+
+    <string-array name="FrequencyArray">
+        <item>Less than once per week</item>
+        <item>Once per week</item>
+        <item>3-5 times per week</item>
+        <item>More than 5 times per week</item>
+    </string-array>
+    <string-array name="IsTrainerArray">
+        <item>Trainer</item>
+        <item>Student</item>
+    </string-array>
 </resources>

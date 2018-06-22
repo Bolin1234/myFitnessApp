@@ -3,6 +3,7 @@ package com.example.bolinwang.tudar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -28,7 +29,9 @@ public class SignUpInfo extends AppCompatActivity{
     private CheckBox checkBoxMale;
     private CheckBox checkBoxFemale;
     private Spinner spinnerFreq;
+    private ArrayAdapter<CharSequence> adapter;
     private FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,15 @@ public class SignUpInfo extends AppCompatActivity{
         btnFinish = (Button) findViewById(R.id.BtnFinish);
         checkBoxMale = (CheckBox) findViewById(R.id.CheckBoxMale);
         checkBoxFemale = (CheckBox) findViewById(R.id.CheckBoxFemale);
-        //spinner not define
+        spinnerFreq = (Spinner) findViewById(R.id.SpinnerFreq);
+
+        //spinner adapter
+        adapter = ArrayAdapter.createFromResource(this, R.array.FrequencyArray, android.R.layout.simple_spinner_item);//
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFreq.setAdapter(adapter);
+
+
+
 
 
 
@@ -53,6 +64,10 @@ public class SignUpInfo extends AppCompatActivity{
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //upload spinnerFreq to firebase
+               // String.valueOf(spinnerFreq.getSelectedItem());
+
+
                 Intent intent = new Intent(SignUpInfo.this, SignUpInfo.class);
                 startActivity(intent);
                 finish();
@@ -60,4 +75,6 @@ public class SignUpInfo extends AppCompatActivity{
         });
 
     }
+
 }
+
