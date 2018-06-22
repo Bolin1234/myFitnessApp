@@ -3,7 +3,14 @@
     <string name="app_name">Tudar</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
-
+    <string name="signUpInfoAge">Age</string>
+    <string name="signUpInfoName">Name</string>
+    <string name="signUpInfoWeight">Weight</string>
+    <string name="signUpInfoHeight">Height</string>
+    <string name="signUpInfoMale">Male</string>
+    <string name="signUpInfoFemale">Female</string>
+    <string name="signUpLoginEmail">Email</string>
+    <string name="signUpLoginPassword">Password</string>
     <string-array name="FrequencyArray">
         <item>Less than once per week</item>
         <item>Once per week</item>

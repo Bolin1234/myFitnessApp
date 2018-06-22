@@ -36,10 +36,10 @@ public class SignUpLogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup_login);
         auth = FirebaseAuth.getInstance();
 
-       /* if(auth.getCurrentUser()!= null){       //if already logged in, then no need to login again
+        if(auth.getCurrentUser()!= null){       //if already logged in, then no need to login again
             startActivity(new Intent(SignUpLogInActivity.this, SignUpInfo.class));
             finish();
-        }*/
+        }
 
         emailSignUp = (EditText) findViewById(R.id.EmailSignUp);
         passwordSignUp = (EditText) findViewById(R.id.PasswordSignUp);
@@ -124,8 +124,8 @@ public class SignUpLogInActivity extends AppCompatActivity {
                             Toast.makeText(SignUpLogInActivity.this, "Authentication failed." + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Intent intentSignup = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
-                            startActivity(intentSignup);
+                            Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
+                            startActivity(intentSignUp);
                             finish();
                         }
                     }
