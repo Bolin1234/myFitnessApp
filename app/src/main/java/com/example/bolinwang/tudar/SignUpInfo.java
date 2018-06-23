@@ -17,8 +17,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import android.content.Intent;
 import android.text.TextUtils;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpInfo extends AppCompatActivity{
     private EditText plaintextAge;
@@ -31,13 +39,14 @@ public class SignUpInfo extends AppCompatActivity{
     private Spinner spinnerFreq;
     private ArrayAdapter<CharSequence> adapter;
     private FirebaseAuth auth;
-
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_info);
         auth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
 
         plaintextAge = (EditText) findViewById(R.id.PlainTextAge);
         plaintextHeight = (EditText) findViewById(R.id.PlainTextHeight);
@@ -65,9 +74,10 @@ public class SignUpInfo extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 //upload spinnerFreq to firebase
-               // String.valueOf(spinnerFreq.getSelectedItem());
+                // String.valueOf(spinnerFreq.getSelectedItem());
 
-
+                mDatabase.child("User").child("Student").child("UserId").child("loginInfo").child("isStudent").setValue(btnFinish);
+                mDatabase.child("User").child("Student").child("UserId").child("loginInfo").child("contact").setValue(btnFinish);
                 Intent intent = new Intent(SignUpInfo.this, SignUpInfo.class);
                 startActivity(intent);
                 finish();
@@ -75,6 +85,5 @@ public class SignUpInfo extends AppCompatActivity{
         });
 
     }
-
 }
 

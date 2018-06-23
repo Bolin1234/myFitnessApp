@@ -4,6 +4,7 @@ package com.example.bolinwang.tudar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import android.content.Intent;
 import android.text.TextUtils;
 
@@ -26,32 +31,29 @@ public class SignUpLogInActivity extends AppCompatActivity {
     private EditText passwordSignUp;
     private Button signUpButton;
     private Button logInButton;
-    private Spinner spinnerIsTrainer;
     private ArrayAdapter<CharSequence> adapter;
     private FirebaseAuth auth;
+    private DatabaseReference mDatabase;
+    public boolean isStudent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_login);
         auth = FirebaseAuth.getInstance();
-
-        if(auth.getCurrentUser()!= null){       //if already logged in, then no need to login again
+        mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid();
+     /*   if(auth.getCurrentUser()!= null){       //if already logged in, then no need to login again
             startActivity(new Intent(SignUpLogInActivity.this, SignUpInfo.class));
             finish();
-        }
+        }*/
 
         emailSignUp = (EditText) findViewById(R.id.EmailSignUp);
         passwordSignUp = (EditText) findViewById(R.id.PasswordSignUp);
         signUpButton = (Button) findViewById(R.id.SignUpButton);
         logInButton = (Button) findViewById(R.id.LogInButton);
-        spinnerIsTrainer = (Spinner) findViewById(R.id.SpinnerIsTrainer);
-
-        //spinner adapter
-        adapter = ArrayAdapter.createFromResource(this, R.array.IsTrainerArray, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerIsTrainer.setAdapter(adapter);
-
+        spinnerIsStudent();
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +126,17 @@ public class SignUpLogInActivity extends AppCompatActivity {
                             Toast.makeText(SignUpLogInActivity.this, "Authentication failed." + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
+
+                            if(isStudent){
+                                mDatabase.child("Student").child(uid).child("loginInfo").child("isStudent").setValue(true);
+                                mDatabase.child("Student").child(uid).child("loginInfo").child("contact").setValue(emailSignUp);
+                                mDatabase.child("Student").child(uid).child("loginInfo").child("password").setValue(passwordSignUp);
+                            }
+                            else {
+                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
+                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("contact").setValue(emailSignUp);
+                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("password").setValue(passwordSignUp);
+                            }
                             Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
                             startActivity(intentSignUp);
                             finish();
@@ -133,4 +146,24 @@ public class SignUpLogInActivity extends AppCompatActivity {
             }
         });
     }
+    public void spinnerIsStudent(){
+        final Spinner spinnerIsStudent = (Spinner) findViewById(R.id.SpinnerIsStudent);
+        //spinner adapter
+        adapter = ArrayAdapter.createFromResource(this, R.array.IsStudentArray, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerIsStudent.setAdapter(adapter);
+        spinnerIsStudent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+               if(position == 0) isStudent = false;
+               else isStudent = true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
+            }
+        });
+    }
+
 }
