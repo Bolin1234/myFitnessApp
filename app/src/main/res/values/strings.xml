@@ -9,6 +9,9 @@
     <string name="signUpInfoHeight">Height</string>
     <string name="signUpInfoMale">Male</string>
     <string name="signUpInfoFemale">Female</string>
+    <string name="signUpInfoFinish">Finish</string>
+    <string name ="signUpInfoFreqQuestion">How often do you exercise?</string>
+    <string name ="signUpInfoGender">Gender</string>
     <string name="signUpLoginEmail">Email</string>
     <string name="signUpLoginPassword">Password</string>
     <string-array name="FrequencyArray">

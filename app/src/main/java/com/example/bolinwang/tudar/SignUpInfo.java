@@ -76,8 +76,8 @@ public class SignUpInfo extends AppCompatActivity{
                 //upload spinnerFreq to firebase
                 // String.valueOf(spinnerFreq.getSelectedItem());
 
-                mDatabase.child("User").child("Student").child("UserId").child("loginInfo").child("isStudent").setValue(btnFinish);
-                mDatabase.child("User").child("Student").child("UserId").child("loginInfo").child("contact").setValue(btnFinish);
+              //  mDatabase.child("User").child("Student").child("UserId").child("loginInfo").child("isStudent").setValue(btnFinish);
+              //  mDatabase.child("User").child("Student").child("UserId").child("loginInfo").child("contact").setValue(btnFinish);
                 Intent intent = new Intent(SignUpInfo.this, SignUpInfo.class);
                 startActivity(intent);
                 finish();
