@@ -95,8 +95,8 @@ public class SignUpLogInActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailSignUpUpload = emailSignUp.getText().toString().trim();
-                String passwordSignUpUpload = passwordSignUp.getText().toString().trim();
+                final String emailSignUpUpload = emailSignUp.getText().toString().trim();
+                final String passwordSignUpUpload = passwordSignUp.getText().toString().trim();
 
                 if (TextUtils.isEmpty(emailSignUpUpload)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -129,13 +129,13 @@ public class SignUpLogInActivity extends AppCompatActivity {
 
                             if(isStudent){
                                 mDatabase.child("Student").child(uid).child("loginInfo").child("isStudent").setValue(true);
-                                mDatabase.child("Student").child(uid).child("loginInfo").child("contact").setValue(emailSignUp);
-                                mDatabase.child("Student").child(uid).child("loginInfo").child("password").setValue(passwordSignUp);
+                                mDatabase.child("Student").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
+                                mDatabase.child("Student").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
                             }
                             else {
                                 mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
-                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("contact").setValue(emailSignUp);
-                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("password").setValue(passwordSignUp);
+                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
+                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
                             }
                             Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
                             startActivity(intentSignUp);
