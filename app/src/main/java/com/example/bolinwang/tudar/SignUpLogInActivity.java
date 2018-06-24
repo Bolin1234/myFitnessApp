@@ -115,34 +115,56 @@ public class SignUpLogInActivity extends AppCompatActivity {
 
                 auth.createUserWithEmailAndPassword(emailSignUpUpload, passwordSignUpUpload)
                         .addOnCompleteListener(SignUpLogInActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        Toast.makeText(SignUpLogInActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(SignUpLogInActivity.this, "Authentication failed." + task.getException(),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
+                                // If sign in fails, display a message to the user. If sign in succeeds
+                                // the auth state listener will be notified and logic to handle the
+                                // signed in user can be handled in the listener.
+                                Toast.makeText(SignUpLogInActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                if (!task.isSuccessful()) {
+                                    Toast.makeText(SignUpLogInActivity.this, "Authentication failed." + task.getException(),
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    auth.signInWithEmailAndPassword(emailSignUpUpload, passwordSignUpUpload)
+                                            .addOnCompleteListener(SignUpLogInActivity.this, new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                    // If sign in fails, display a message to the user. If sign in succeeds
+                                                    // the auth state listener will be notified and logic to handle the
+                                                    // signed in user can be handled in the listener
+                                                    if (task.isSuccessful()) {
+                                                        Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
+                                                        startActivity(intentSignUp);
+                                                        finish();
+                                                    }
+                                                    else{
+                                                        if (passwordSignUpUpload.length() < 6) {
+                                                            passwordSignUp.setError(getString(R.string.minimum_password));
+                                                        } else {
+                                                            Toast.makeText(SignUpLogInActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                                                        }
+                                                    }
+                                                }
+                                            });
 
-                            if(isStudent){
-                                mDatabase.child("Student").child(uid).child("loginInfo").child("isStudent").setValue(true);
-                                mDatabase.child("Student").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
-                                mDatabase.child("Student").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
+                                    if(isStudent){
+                                        mDatabase.child("Student").child(uid).child("loginInfo").child("isStudent").setValue(true);
+                                        mDatabase.child("Student").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
+                                        mDatabase.child("Student").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
+                                    }
+                                    else {
+                                        mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
+                                        mDatabase.child("Trainer").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
+                                        mDatabase.child("Trainer").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
+                                    }
+                                    //Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
+                                    //startActivity(intentSignUp);
+                                    //finish();
+                                }
                             }
-                            else {
-                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
-                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
-                                mDatabase.child("Trainer").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
-                            }
-                            Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
-                            startActivity(intentSignUp);
-                            finish();
-                        }
-                    }
-                });
+                        });
+
             }
         });
     }
@@ -155,8 +177,9 @@ public class SignUpLogInActivity extends AppCompatActivity {
         spinnerIsStudent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-               if(position == 0) isStudent = false;
-               else isStudent = true;
+                isStudent = true;
+                if(position == 0) isStudent = false;
+
             }
 
             @Override
