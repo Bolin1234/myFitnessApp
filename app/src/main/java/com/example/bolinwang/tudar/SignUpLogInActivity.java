@@ -42,8 +42,6 @@ public class SignUpLogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup_login);
         auth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        final String uid = user.getUid();
      /*   if(auth.getCurrentUser()!= null){       //if already logged in, then no need to login again
             startActivity(new Intent(SignUpLogInActivity.this, SignUpInfo.class));
             finish();
@@ -123,7 +121,7 @@ public class SignUpLogInActivity extends AppCompatActivity {
                                 // signed in user can be handled in the listener.
                                 Toast.makeText(SignUpLogInActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(SignUpLogInActivity.this, "Authentication failed." + task.getException(),
+                                        Toast.makeText(SignUpLogInActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     auth.signInWithEmailAndPassword(emailSignUpUpload, passwordSignUpUpload)
@@ -134,6 +132,18 @@ public class SignUpLogInActivity extends AppCompatActivity {
                                                     // the auth state listener will be notified and logic to handle the
                                                     // signed in user can be handled in the listener
                                                     if (task.isSuccessful()) {
+                                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                                        String uid = user.getUid();
+                                                        if(isStudent){
+                                                            mDatabase.child("Student").child(uid).child("loginInfo").child("isStudent").setValue(true);
+                                                            mDatabase.child("Student").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
+                                                            mDatabase.child("Student").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
+                                                        }
+                                                        else {
+                                                            mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
+                                                            mDatabase.child("Trainer").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
+                                                            mDatabase.child("Trainer").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
+                                                        }
                                                         Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
                                                         startActivity(intentSignUp);
                                                         finish();
@@ -147,20 +157,6 @@ public class SignUpLogInActivity extends AppCompatActivity {
                                                     }
                                                 }
                                             });
-
-                                    if(isStudent){
-                                        mDatabase.child("Student").child(uid).child("loginInfo").child("isStudent").setValue(true);
-                                        mDatabase.child("Student").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
-                                        mDatabase.child("Student").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
-                                    }
-                                    else {
-                                        mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
-                                        mDatabase.child("Trainer").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
-                                        mDatabase.child("Trainer").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
-                                    }
-                                    //Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
-                                    //startActivity(intentSignUp);
-                                    //finish();
                                 }
                             }
                         });
@@ -178,7 +174,7 @@ public class SignUpLogInActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 isStudent = true;
-                if(position == 0) isStudent = false;
+                if(position == 1) isStudent = false;
 
             }
 

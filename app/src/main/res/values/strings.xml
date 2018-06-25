@@ -21,7 +21,7 @@
         <item>More than 5 times per week</item>
     </string-array>
     <string-array name="IsStudentArray">
-        <item>Trainer</item>
         <item>Student</item>
+        <item>Trainer</item>
     </string-array>
 </resources>

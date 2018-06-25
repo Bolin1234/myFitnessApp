@@ -55,10 +55,7 @@ public class SignUpInfo extends AppCompatActivity{
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user != null) {
-            for(UserInfo profile: user.getProviderData()){
-                String providerId = profile.getProviderId();
-                uid = profile.getUid();
-            }
+            uid = user.getUid();
         }
 
 
@@ -82,6 +79,7 @@ public class SignUpInfo extends AppCompatActivity{
                 onCheckboxClicked(view);
             }
         });
+
         spinnerFreq();
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,12 +90,34 @@ public class SignUpInfo extends AppCompatActivity{
                 String plaintextWeightString = plaintextWeight.getText().toString().trim();
                 int plaintextHeightUpload = Integer.parseInt(plaintextHeightString);
                 int plaintextWeightUpload = Integer.parseInt(plaintextWeightString);
-                mDatabase.child("Student").child(uid).child("UserData").child("Age").setValue(plaintextAgeUpload);
+
+                if (TextUtils.isEmpty(plaintextAgeUpload)) {
+                    Toast.makeText(getApplicationContext(), "Enter Age!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else  mDatabase.child("Student").child(uid).child("UserData").child("Age").setValue(plaintextAgeUpload);
                 mDatabase.child("Student").child(uid).child("UserData").child("Frequency").setValue(freq);
-                mDatabase.child("Student").child(uid).child("UserData").child("Height").setValue(plaintextHeightUpload);
-                mDatabase.child("Student").child(uid).child("UserData").child("Name").setValue(plaintextNameUpload);
-                mDatabase.child("Student").child(uid).child("UserData").child("Weight").setValue(plaintextWeightUpload);
-                mDatabase.child("Student").child(uid).child("UserData").child("isFemale").setValue(isFemale);
+                if (TextUtils.isEmpty(plaintextHeightString)) {
+                    Toast.makeText(getApplicationContext(), "Enter Height!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else mDatabase.child("Student").child(uid).child("UserData").child("Height").setValue(plaintextHeightUpload);
+                if (TextUtils.isEmpty(plaintextNameUpload)) {
+                    Toast.makeText(getApplicationContext(), "Enter Name!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else mDatabase.child("Student").child(uid).child("UserData").child("Name").setValue(plaintextNameUpload);
+                if (TextUtils.isEmpty(plaintextWeightString)) {
+                    Toast.makeText(getApplicationContext(), "Enter Weight!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else mDatabase.child("Student").child(uid).child("UserData").child("Weight").setValue(plaintextWeightUpload);
+                if(!(checkBoxMale.isChecked())&&!(checkBoxFemale.isChecked())){
+                    Toast.makeText(getApplicationContext(), "select gender!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else mDatabase.child("Student").child(uid).child("UserData").child("isFemale").setValue(isFemale);
+
+
+
+
+
+
                 Intent intent = new Intent(SignUpInfo.this, SignUpInfo.class);
                 startActivity(intent);
                 finish();
