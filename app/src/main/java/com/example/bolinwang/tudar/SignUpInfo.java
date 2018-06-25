@@ -84,22 +84,30 @@ public class SignUpInfo extends AppCompatActivity{
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String plaintextAgeUpload = plaintextAge.getText().toString().trim();
+                String plaintextAgeString = plaintextAge.getText().toString().trim();
                 String plaintextHeightString = plaintextHeight.getText().toString().trim();
                 String plaintextNameUpload = plaintextName.getText().toString().trim();
                 String plaintextWeightString = plaintextWeight.getText().toString().trim();
-                int plaintextHeightUpload = Integer.parseInt(plaintextHeightString);
-                int plaintextWeightUpload = Integer.parseInt(plaintextWeightString);
 
-                if (TextUtils.isEmpty(plaintextAgeUpload)) {
+
+
+
+                if (TextUtils.isEmpty(plaintextAgeString)) {
                     Toast.makeText(getApplicationContext(), "Enter Age!", Toast.LENGTH_SHORT).show();
                     return;
-                } else  mDatabase.child("Student").child(uid).child("UserData").child("Age").setValue(plaintextAgeUpload);
+                } else {
+                    int plaintextAgeUpload = Integer.parseInt(plaintextAgeString);
+                    mDatabase.child("Student").child(uid).child("UserData").child("Age").setValue(plaintextAgeUpload);
+                }
                 mDatabase.child("Student").child(uid).child("UserData").child("Frequency").setValue(freq);
                 if (TextUtils.isEmpty(plaintextHeightString)) {
                     Toast.makeText(getApplicationContext(), "Enter Height!", Toast.LENGTH_SHORT).show();
                     return;
-                } else mDatabase.child("Student").child(uid).child("UserData").child("Height").setValue(plaintextHeightUpload);
+                } else{
+                    double plaintextHeightUpload = Double.parseDouble(plaintextHeightString);
+                    mDatabase.child("Student").child(uid).child("UserData").child("Height").setValue(plaintextHeightUpload);
+                }
+
                 if (TextUtils.isEmpty(plaintextNameUpload)) {
                     Toast.makeText(getApplicationContext(), "Enter Name!", Toast.LENGTH_SHORT).show();
                     return;
@@ -107,7 +115,10 @@ public class SignUpInfo extends AppCompatActivity{
                 if (TextUtils.isEmpty(plaintextWeightString)) {
                     Toast.makeText(getApplicationContext(), "Enter Weight!", Toast.LENGTH_SHORT).show();
                     return;
-                } else mDatabase.child("Student").child(uid).child("UserData").child("Weight").setValue(plaintextWeightUpload);
+                } else{
+                    double plaintextWeightUpload = Double.parseDouble(plaintextWeightString);
+                    mDatabase.child("Student").child(uid).child("UserData").child("Weight").setValue(plaintextWeightUpload);
+                }
                 if(!(checkBoxMale.isChecked())&&!(checkBoxFemale.isChecked())){
                     Toast.makeText(getApplicationContext(), "select gender!", Toast.LENGTH_SHORT).show();
                     return;
