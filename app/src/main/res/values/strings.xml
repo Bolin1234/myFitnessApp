@@ -10,10 +10,16 @@
     <string name="signUpInfoMale">Male</string>
     <string name="signUpInfoFemale">Female</string>
     <string name="signUpInfoFinish">Finish</string>
-    <string name ="signUpInfoFreqQuestion">How often do you exercise?</string>
-    <string name ="signUpInfoGender">Gender</string>
+    <string name="signUpInfoFreqQuestion">How often do you exercise?</string>
+    <string name="signUpInfoGender">Gender</string>
     <string name="signUpLoginEmail">Email</string>
     <string name="signUpLoginPassword">Password</string>
+
+    <string name="trainerCertifyId">ID Number</string>
+    <string name="trainerCertifyRealName">Real Name</string>
+    <string name="trainerCertifyImgUpload">Upload</string>
+    <string name="trainerCertifyImgSelect">Choose from gallery</string>
+    <string name="trainerCertifyDone">Next</string>
     <string-array name="FrequencyArray">
         <item>Less than once per week</item>
         <item>Once per week</item>
