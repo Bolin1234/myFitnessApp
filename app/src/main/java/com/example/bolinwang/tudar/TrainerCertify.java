@@ -77,30 +77,37 @@ public class TrainerCertify extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if(user != null)
+        /*if(user != null) {
             uid = user.getUid();
-
-        btnSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseImage();
+            //check if verified
+            if(//verified){
+                Intent intentTrainerMain = new Intent(TrainerCertify.this, TrainerMainActivity.class);
+                startActivity(intentTrainerMain);
+                finish();
             }
-        });
+            else {
+                btnSelect.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        chooseImage();
+                    }
+                });
 
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadImage();
-            }
-        });
+                btnUpload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        uploadImage();
+                    }
+                });
 
-        btnDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                infoUpload();
+                btnDone.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        infoUpload();
+                    }
+                });
             }
-        });
+        }*/
     }
     private void chooseImage() {
         Intent intent = new Intent();
@@ -133,7 +140,7 @@ public class TrainerCertify extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("TrainerCertificationImages/"+ UUID.randomUUID().toString());
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -167,14 +174,15 @@ public class TrainerCertify extends AppCompatActivity {
             return;
         } else {
             int editTextIDUpload = Integer.parseInt(editTextIDString);
-            mDatabase.child("Trainer").child(uid).child("UserData").child("ID").setValue(editTextIDUpload);
+            mDatabase.child("Trainer").child(uid).child("loginInfo").child("ID").setValue(editTextIDUpload);
         }
-        mDatabase.child("Trainer").child(uid).child("UserData").child("Frequency").setValue(freq);
+        mDatabase.child("Trainer").child(uid).child("loginInfo").child("Verified").setValue(false);
+        mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
         if (TextUtils.isEmpty(editTextNameString)) {
             Toast.makeText(getApplicationContext(), "Enter Name!", Toast.LENGTH_SHORT).show();
             return;
         } else{
-            mDatabase.child("Trainer").child(uid).child("UserData").child("Height").setValue(editTextNameString);
+            mDatabase.child("Trainer").child(uid).child("UserData").child("Name").setValue(editTextNameString);
         }
     }
 }

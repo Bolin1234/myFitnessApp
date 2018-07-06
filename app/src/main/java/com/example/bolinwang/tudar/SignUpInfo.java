@@ -124,12 +124,7 @@ public class SignUpInfo extends AppCompatActivity{
                     return;
                 } else mDatabase.child("Student").child(uid).child("UserData").child("isFemale").setValue(isFemale);
 
-
-
-
-
-
-                Intent intent = new Intent(SignUpInfo.this, SignUpInfo.class);
+                Intent intent = new Intent(SignUpInfo.this, StudentMainActivity.class);
                 startActivity(intent);
                 finish();
             }

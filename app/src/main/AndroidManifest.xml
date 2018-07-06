@@ -18,9 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpInfo"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".TrainerCertify"></activity>
+        <activity android:name=".SignUpInfo" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".TrainerCertify" />
+        <activity
+            android:name=".TrainerMainActivity"
+            android:label="@string/title_activity_trainer_main" />
+        <activity
+            android:name=".StudentMainActivity"
+            android:label="@string/title_activity_student_main"></activity>
     </application>
 
 </manifest>

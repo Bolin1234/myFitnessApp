@@ -30,4 +30,20 @@
         <item>Student</item>
         <item>Trainer</item>
     </string-array>
+    <string name="title_activity_trainer_main">TrainerMainActivity</string>
+    <string name="title_article_trainer">文章</string>
+    <string name="title_answer_question_trainer">回答问题</string>
+    <string name="title_notifications_trainer">个人中心</string>
+    <string name="title_private_training_trainer">私教</string>
+    <string name="title_home_trainer">Home</string>
+    <string name="title_dashboard_trainer">Dashboard</string>
+
+    <string name="title_activity_student_main">StudentMainActivity</string>
+    <string name="title_article_student">文章</string>
+    <string name="title_ask_question_student">提问</string>
+    <string name="title_notifications_student">个人中心</string>
+    <string name="title_private_training_student">私教</string>
+    <string name="title_home_student">Home</string>
+    <string name="title_dashboard_student">Dashboard</string>
+
 </resources>

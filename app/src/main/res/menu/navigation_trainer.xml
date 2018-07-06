@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_article_trainer"
+        android:icon="@drawable/ic_article_trainer"
+        android:title="@string/title_article_trainer" />
+
+    <item
+        android:id="@+id/navigation_answer_question_trainer"
+        android:icon="@drawable/ic_article_trainer"
+        android:title="@string/title_answer_question_trainer" />
+
+    <item
+        android:id="@+id/navigation_private_training_trainer"
+        android:icon="@drawable/ic_article_trainer"
+        android:title="@string/title_private_training_trainer" />
+    <item
+        android:id="@+id/navigation_notifications_trainer"
+        android:icon="@drawable/ic_article_trainer"
+        android:title="@string/title_notifications_trainer" />
+
+</menu>

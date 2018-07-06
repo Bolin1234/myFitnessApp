@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_article_student"
+        android:icon="@drawable/ic_article_trainer"
+        android:title="@string/title_article_student" />
+
+    <item
+        android:id="@+id/navigation_ask_question_student"
+        android:icon="@drawable/ic_article_trainer"
+        android:title="@string/title_ask_question_student" />
+
+    <item
+        android:id="@+id/navigation_private_training_student"
+        android:icon="@drawable/ic_article_trainer"
+        android:title="@string/title_private_training_student" />
+    <item
+        android:id="@+id/navigation_notifications_student"
+        android:icon="@drawable/ic_article_trainer"
+        android:title="@string/title_notifications_student" />
+
+</menu>

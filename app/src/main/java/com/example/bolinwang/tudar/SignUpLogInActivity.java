@@ -1,6 +1,7 @@
 package com.example.bolinwang.tudar;
 
 
+import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 //added import
 import android.support.annotation.NonNull;
 
@@ -25,6 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
 
 public class SignUpLogInActivity extends AppCompatActivity {
     private EditText emailSignUp;
@@ -35,18 +43,26 @@ public class SignUpLogInActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference mDatabase;
     public boolean isStudent;
-
+    String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_login);
         auth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
-     /*   if(auth.getCurrentUser()!= null){       //if already logged in, then no need to login again
-            startActivity(new Intent(SignUpLogInActivity.this, SignUpInfo.class));
+       /* if(auth.getCurrentUser()!= null){       //if already logged in, then no need to login again
+            mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            uid = user.getUid();
+            DataSnapshot dataSnapshot;
+            DataSnapshot ref = dataSnapshot.child(uid).child("isStudent");//getValue(String.classchild(uid).child("loginInfo").child("isStudent"));
+            //based on whether it's a student or a trainer, we go to differnet pages.
+            if(//student)
+                startActivity(new Intent(SignUpLogInActivity.this, SignUpInfo.class));
+            else
+                startActivity(new Intent(SignUpLogInActivity.this, TrainerCertify.class));
             finish();
         }*/
-
         emailSignUp = (EditText) findViewById(R.id.EmailSignUp);
         passwordSignUp = (EditText) findViewById(R.id.PasswordSignUp);
         signUpButton = (Button) findViewById(R.id.SignUpButton);
@@ -138,14 +154,16 @@ public class SignUpLogInActivity extends AppCompatActivity {
                                                             mDatabase.child("Student").child(uid).child("loginInfo").child("isStudent").setValue(true);
                                                             mDatabase.child("Student").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
                                                             mDatabase.child("Student").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
+                                                            Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
+                                                            startActivity(intentSignUp);
                                                         }
                                                         else {
                                                             mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
                                                             mDatabase.child("Trainer").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
                                                             mDatabase.child("Trainer").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
+                                                            Intent intentTrainerCertify = new Intent(SignUpLogInActivity.this, TrainerCertify.class);
+                                                            startActivity(intentTrainerCertify);
                                                         }
-                                                        Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
-                                                        startActivity(intentSignUp);
                                                         finish();
                                                     }
                                                     else{
