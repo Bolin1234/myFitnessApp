@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignUpLogInActivity">
+        <activity android:name=".StudentMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
             android:name=".TrainerMainActivity"
             android:label="@string/title_activity_trainer_main" />
         <activity
-            android:name=".StudentMainActivity"
+            android:name=".SignUpLogInActivity"
             android:label="@string/title_activity_student_main"></activity>
     </application>
 

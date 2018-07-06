@@ -30,6 +30,10 @@
         <item>Student</item>
         <item>Trainer</item>
     </string-array>
+
+
+
+
     <string name="title_activity_trainer_main">TrainerMainActivity</string>
     <string name="title_article_trainer">文章</string>
     <string name="title_answer_question_trainer">回答问题</string>
@@ -45,5 +49,15 @@
     <string name="title_private_training_student">私教</string>
     <string name="title_home_student">Home</string>
     <string name="title_dashboard_student">Dashboard</string>
+
+
+
+    <string name="stuMainPrivTrainDiet">饮食计划</string>
+    <string name="stuMainPrivTrainExercise">运动计划</string>
+    <string name="stuMainPrivTrainSchedule">课程安排</string>
+    <string name="stuMainPrivTrainChat">聊天</string>
+    <string name="stuMainPrivTrainVideoChat">语音视频</string>
+    <string name="stuMainAskAskEasy">快速提问</string>
+
 
 </resources>
