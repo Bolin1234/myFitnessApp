@@ -20,28 +20,22 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 public class TrainerCertify extends AppCompatActivity {
     EditText editTextID;
@@ -56,7 +50,6 @@ public class TrainerCertify extends AppCompatActivity {
 
     FirebaseAuth auth;
     private DatabaseReference mDatabase;
-    int freq;
     String uid;
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -77,37 +70,52 @@ public class TrainerCertify extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        /*if(user != null) {
+        if (user != null) {
             uid = user.getUid();
-            //check if verified
-            if(//verified){
-                Intent intentTrainerMain = new Intent(TrainerCertify.this, TrainerMainActivity.class);
-                startActivity(intentTrainerMain);
-                finish();
-            }
-            else {
-                btnSelect.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        chooseImage();
+            //check if verified or if info completed
+            mDatabase.child("Trainer").child(uid).child("loginInfo").child("verified").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!(dataSnapshot.getValue() == null)) {
+                        if (dataSnapshot.getValue().toString().equals("true")) {
+                            Toast.makeText(getApplicationContext(), "Verified!", Toast.LENGTH_SHORT).show();
+                            Intent intentTrainerMain = new Intent(TrainerCertify.this, TrainerMainActivity.class);
+                            startActivity(intentTrainerMain);
+                            finish();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Wait Until Being Verified!", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                });
+                    else{
+                        btnSelect.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                chooseImage();
+                            }
+                        });
 
-                btnUpload.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        uploadImage();
-                    }
-                });
+                        btnUpload.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                uploadImage();
+                            }
+                        });
 
-                btnDone.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        infoUpload();
+                        btnDone.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                infoUpload();
+                            }
+                        });
                     }
-                });
-            }
-        }*/
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
     private void chooseImage() {
         Intent intent = new Intent();
@@ -176,11 +184,11 @@ public class TrainerCertify extends AppCompatActivity {
             int editTextIDUpload = Integer.parseInt(editTextIDString);
             mDatabase.child("Trainer").child(uid).child("loginInfo").child("ID").setValue(editTextIDUpload);
         }
-        mDatabase.child("Trainer").child(uid).child("loginInfo").child("Verified").setValue(false);
+        mDatabase.child("Trainer").child(uid).child("loginInfo").child("verified").setValue(false);
         mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
         if (TextUtils.isEmpty(editTextNameString)) {
             Toast.makeText(getApplicationContext(), "Enter Name!", Toast.LENGTH_SHORT).show();
-            return;
+           // return;
         } else{
             mDatabase.child("Trainer").child(uid).child("UserData").child("Name").setValue(editTextNameString);
         }

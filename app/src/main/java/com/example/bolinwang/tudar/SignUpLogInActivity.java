@@ -1,7 +1,5 @@
 package com.example.bolinwang.tudar;
 
-
-import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,25 +19,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 
 public class SignUpLogInActivity extends AppCompatActivity {
     private EditText emailSignUp;
     private EditText passwordSignUp;
-    private Button signUpButton;
-    private Button logInButton;
-    private ArrayAdapter<CharSequence> adapter;
+    Button signUpButton;
+    Button logInButton;
+    ArrayAdapter<CharSequence> adapter;
     private FirebaseAuth auth;
     private DatabaseReference mDatabase;
     public boolean isStudent;
@@ -50,19 +46,14 @@ public class SignUpLogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup_login);
         auth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
-       /* if(auth.getCurrentUser()!= null){       //if already logged in, then no need to login again
+        if(auth.getCurrentUser()!= null){       //if already logged in, then no need to login again
             mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             uid = user.getUid();
-            DataSnapshot dataSnapshot;
-            DataSnapshot ref = dataSnapshot.child(uid).child("isStudent");//getValue(String.classchild(uid).child("loginInfo").child("isStudent"));
-            //based on whether it's a student or a trainer, we go to differnet pages.
-            if(//student)
-                startActivity(new Intent(SignUpLogInActivity.this, SignUpInfo.class));
-            else
-                startActivity(new Intent(SignUpLogInActivity.this, TrainerCertify.class));
-            finish();
-        }*/
+            //check if the uid exist in student or trainer. Based on whether it's a student or a trainer, we go to differnet pages.
+            checkIdentity();
+        }
+
         emailSignUp = (EditText) findViewById(R.id.EmailSignUp);
         passwordSignUp = (EditText) findViewById(R.id.PasswordSignUp);
         signUpButton = (Button) findViewById(R.id.SignUpButton);
@@ -96,10 +87,9 @@ public class SignUpLogInActivity extends AppCompatActivity {
                                     } else {
                                         Toast.makeText(SignUpLogInActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
-                                } else {
-                                    Intent intentLogin = new Intent(SignUpLogInActivity.this, MainActivity.class);
-                                    startActivity(intentLogin);
-                                    finish();
+                                }
+                                else {
+                                    checkIdentity();
                                 }
                             }
                 });
@@ -201,6 +191,28 @@ public class SignUpLogInActivity extends AppCompatActivity {
                 //do nothing
             }
         });
+    }
+    private void checkIdentity(){
+        //check if the uid exist in student or trainer. Based on whether it's a student or a trainer, we go to differnet pages.
+            mDatabase.child("Student").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(uid).exists()) {
+                        Toast.makeText(getApplicationContext(), "Student!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignUpLogInActivity.this, SignUpInfo.class));
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Trainer!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignUpLogInActivity.this, TrainerCertify.class));
+                    }
+                    finish();
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
     }
 
 }

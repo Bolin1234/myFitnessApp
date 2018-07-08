@@ -54,9 +54,24 @@ public class SignUpInfo extends AppCompatActivity{
         mDatabase = FirebaseDatabase.getInstance().getReference("User");  //initialize database reference
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user != null) {
+        if(user != null)
             uid = user.getUid();
-        }
+        //check if information is completed
+        mDatabase.child("Student").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("UserData").exists()){
+                    Intent intentStudentMain = new Intent(SignUpInfo.this, StudentMainActivity.class);
+                    startActivity(intentStudentMain);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         plaintextAge = (EditText) findViewById(R.id.PlainTextAge);
