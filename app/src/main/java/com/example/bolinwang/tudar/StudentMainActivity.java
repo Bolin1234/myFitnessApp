@@ -6,8 +6,10 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StudentMainActivity extends AppCompatActivity {
 
@@ -30,6 +32,7 @@ public class StudentMainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_ask_question_student:
                     askQuestionStudent();
+                    //Toast.makeText(StudentMainActivity.this, "Ask Question Button Pressed", Toast.LENGTH_SHORT).show();
                     return true;
             }
             return false;
@@ -41,18 +44,42 @@ public class StudentMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.NavigationStudent);
+        mTextMessage = findViewById(R.id.message);
+        BottomNavigationView navigation = findViewById(R.id.NavigationStudent);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
     private void articleStudent(){
-        ConstraintLayout layoutArtiStu = (ConstraintLayout) findViewById(R.id.LayoutArtiStu);
+        //ConstraintLayout layoutArtiStu = findViewById(R.id.LayoutArtiStu);
         //layoutArtiStu.bringToFront();
+        ConstraintLayout layoutAskStu = findViewById(R.id.LayoutAskStu);
+        layoutAskStu.setVisibility(ConstraintLayout.GONE);
+        ConstraintLayout layoutPrivStu = findViewById(R.id.LayoutPrivStu);
+        layoutPrivStu.setVisibility(ConstraintLayout.GONE);
+        ConstraintLayout layoutNotiStu = findViewById(R.id.LayoutNotiStu);
+        layoutNotiStu.setVisibility(ConstraintLayout.GONE);
+        ConstraintLayout layoutArtiStu = findViewById(R.id.LayoutArtiStu);
+        layoutArtiStu.setVisibility(ConstraintLayout.VISIBLE);
     }
     private void privateTrainingStudent(){
-        //ConstraintLayout layoutPrivStu = (ConstraintLayout) findViewById(R.id.LayoutPrivStu);
+        //ConstraintLayout layoutPrivStu = findViewById(R.id.LayoutPrivStu);
         //layoutPrivStu.bringToFront();
-        //Button btnDiet = (Button)findViewById(R.id.BtnDiet);
+        //layoutPrivStu.setVisibility(ConstraintLayout.VISIBLE);
+        ConstraintLayout layoutAskStu = findViewById(R.id.LayoutAskStu);
+        layoutAskStu.setVisibility(ConstraintLayout.GONE);
+        ConstraintLayout layoutPrivStu = findViewById(R.id.LayoutPrivStu);
+        layoutPrivStu.setVisibility(ConstraintLayout.VISIBLE);
+        ConstraintLayout layoutNotiStu = findViewById(R.id.LayoutNotiStu);
+        layoutNotiStu.setVisibility(ConstraintLayout.GONE);
+        ConstraintLayout layoutArtiStu = findViewById(R.id.LayoutArtiStu);
+        layoutArtiStu.setVisibility(ConstraintLayout.GONE);
+
+        Button btnDiet = findViewById(R.id.BtnDiet);
+        btnDiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(StudentMainActivity.this, "Diet Success", Toast.LENGTH_LONG).show();
+            }
+        });
         //Button btnExercise = (Button)findViewById(R.id.BtnExercise);
         //Button btnChat = (Button)findViewById(R.id.BtnChat);
         //Button btnVidChat = (Button)findViewById(R.id.BtnVidChat);
@@ -60,13 +87,30 @@ public class StudentMainActivity extends AppCompatActivity {
 
     }
     private void notificationStudent(){
-        ConstraintLayout layoutNotiStu = (ConstraintLayout) findViewById(R.id.LayoutNotiStu);
-       // layoutNotiStu.bringToFront();
+        //  ConstraintLayout layoutNotiStu = findViewById(R.id.LayoutNotiStu);
+        //  layoutNotiStu.bringToFront();
+
+
+        ConstraintLayout layoutAskStu = findViewById(R.id.LayoutAskStu);
+        layoutAskStu.setVisibility(ConstraintLayout.GONE);
+        ConstraintLayout layoutPrivStu = findViewById(R.id.LayoutPrivStu);
+        layoutPrivStu.setVisibility(ConstraintLayout.GONE);
+        ConstraintLayout layoutNotiStu = findViewById(R.id.LayoutNotiStu);
+        layoutNotiStu.setVisibility(ConstraintLayout.VISIBLE);
+        ConstraintLayout layoutArtiStu = findViewById(R.id.LayoutArtiStu);
+        layoutArtiStu.setVisibility(ConstraintLayout.GONE);
 
     }
     private void askQuestionStudent(){
-        ConstraintLayout layoutAskStu = (ConstraintLayout) findViewById(R.id.LayoutAskStu);
-       // layoutAskStu.bringToFront();
+        ConstraintLayout layoutAskStu = findViewById(R.id.LayoutAskStu);
+        //layoutAskStu.bringToFront();
+        layoutAskStu.setVisibility(ConstraintLayout.VISIBLE);
+        ConstraintLayout layoutPrivStu = findViewById(R.id.LayoutPrivStu);
+        layoutPrivStu.setVisibility(ConstraintLayout.GONE);
+        ConstraintLayout layoutNotiStu = findViewById(R.id.LayoutNotiStu);
+        layoutNotiStu.setVisibility(ConstraintLayout.GONE);
+        ConstraintLayout layoutArtiStu = findViewById(R.id.LayoutArtiStu);
+        layoutArtiStu.setVisibility(ConstraintLayout.GONE);
     }
 
 }

@@ -148,7 +148,7 @@ public class TrainerCertify extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("TrainerCertificationImages/"+ UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("TrainerCertificationImages/"+ uid);
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
