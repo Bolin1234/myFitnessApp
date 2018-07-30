@@ -1,5 +1,6 @@
 package com.example.bolinwang.tudar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 public class StudentMainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    Button btnQuickAsk;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,7 +50,18 @@ public class StudentMainActivity extends AppCompatActivity {
         mTextMessage = findViewById(R.id.message);
         BottomNavigationView navigation = findViewById(R.id.NavigationStudent);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        btnQuickAsk = findViewById(R.id.BtnQuickAsk);
+        btnQuickAsk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentMainActivity.this, QuickAsk.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
+
     private void articleStudent(){
         //ConstraintLayout layoutArtiStu = findViewById(R.id.LayoutArtiStu);
         //layoutArtiStu.bringToFront();
