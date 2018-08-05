@@ -21,8 +21,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -179,7 +182,17 @@ public class QuickAsk extends AppCompatActivity {
                         onePicFlag = false;
                         ClipData mClipData = data.getClipData();
                         mArrayUri = new ArrayList<Uri>();
-                        for (int i = 0; i < mClipData.getItemCount(); i++) {
+
+                        int itemCount;
+                        if(mClipData.getItemCount() <= 3)
+                            itemCount = mClipData.getItemCount();
+                        else {
+                            itemCount = 3;
+                            Toast.makeText(this, "Select no more than 3 image",
+                                    Toast.LENGTH_LONG).show();
+                        }
+
+                        for (int i = 0; i < itemCount; i++) {
 
                             ClipData.Item item = mClipData.getItemAt(i);
                             Uri uri = item.getUri();
@@ -271,36 +284,101 @@ public class QuickAsk extends AppCompatActivity {
                 progressDialog.show();
 
                 final StorageReference ref = storageReference.child("QuestionImages/"+ UUID.randomUUID().toString());
-                ref.putFile(mArrayUri.get(j))
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                progressDialog.dismiss();
-                                Toast.makeText(QuickAsk.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        DatabaseReference mDatabaseTemp = mDatabaseQuestion.child("QuickQuestion").child(questionID);
-                                        mDatabaseTemp.child("Photos").child("Photo"+j+"Location").setValue(uri.toString());
-                                    }
-                                });
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
-                                Toast.makeText(QuickAsk.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                                double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                        .getTotalByteCount());
-                                progressDialog.setMessage("Uploaded "+(int)progress+"%");
-                            }
-                        });
+                if(j == 0){
+                    ref.putFile(mArrayUri.get(0))
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(QuickAsk.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            final DatabaseReference mDatabaseTemp = mDatabaseQuestion.child("QuickQuestion").child(questionID);
+                                            mDatabaseTemp.child("Photos").child("Photo1Location").setValue(uri.toString());
+                                        }
+                                    });
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(QuickAsk.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                    double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                            .getTotalByteCount());
+                                    progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                                }
+                            });
+                }else if(j == 1){
+                    ref.putFile(mArrayUri.get(j))
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(QuickAsk.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            final DatabaseReference mDatabaseTemp = mDatabaseQuestion.child("QuickQuestion").child(questionID);
+                                            mDatabaseTemp.child("Photos").child("Photo2Location").setValue(uri.toString());
+                                        }
+                                    });
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(QuickAsk.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                    double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                            .getTotalByteCount());
+                                    progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                                }
+                            });
+                }else if(j == 2){
+                    ref.putFile(mArrayUri.get(j))
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(QuickAsk.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            final DatabaseReference mDatabaseTemp = mDatabaseQuestion.child("QuickQuestion").child(questionID);
+                                            mDatabaseTemp.child("Photos").child("Photo3Location").setValue(uri.toString());
+                                        }
+                                    });
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(QuickAsk.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                    double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                            .getTotalByteCount());
+                                    progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                                }
+                            });
+                }
+
 
             }
         }
