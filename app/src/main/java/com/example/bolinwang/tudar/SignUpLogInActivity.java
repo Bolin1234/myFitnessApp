@@ -51,7 +51,7 @@ public class SignUpLogInActivity extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             uid = user.getUid();
             //check if the uid exist in student or trainer. Based on whether it's a student or a trainer, we go to differnet pages.
-            checkIdentity();
+            checkIdentity();              //note here we prevent auto login
         }
 
         emailSignUp = (EditText) findViewById(R.id.EmailSignUp);

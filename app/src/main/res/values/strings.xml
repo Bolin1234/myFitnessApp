@@ -31,6 +31,7 @@
         <item>Trainer</item>
     </string-array>
 
+    <string name="trainerWaiting">请等待认证通过</string>
 
     <string name="title_activity_trainer_main">TrainerMainActivity</string>
     <string name="title_article_trainer">文章</string>
@@ -54,7 +55,14 @@
     <string name="stuMainPrivTrainSchedule">课程安排</string>
     <string name="stuMainPrivTrainChat">聊天</string>
     <string name="stuMainPrivTrainVideoChat">语音视频</string>
-    <string name="stuMainAskAskEasy">快速提问</string>
+    <string name="stuMainAskEasy">快速提问</string>
+
+    <string name="traMainPrivTrainDiet">饮食计划</string>
+    <string name="traMainPrivTrainExercise">运动计划</string>
+    <string name="traMainPrivTrainSchedule">课程安排</string>
+    <string name="traMainPrivTrainChat">聊天</string>
+    <string name="traMainPrivTrainVideoChat">语音视频</string>
+    <string name="traMainAnswerEasy">快速回答</string>
 
 
 </resources>

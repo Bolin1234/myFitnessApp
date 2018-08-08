@@ -85,6 +85,9 @@ public class TrainerCertify extends AppCompatActivity {
                         }
                         else {
                             Toast.makeText(getApplicationContext(), "Wait Until Being Verified!", Toast.LENGTH_SHORT).show();
+                            Intent intentTrainerWaiting = new Intent(TrainerCertify.this, TrainerWaiting.class);
+                            startActivity(intentTrainerWaiting);
+                            finish();
                         }
                     }
                     else{
@@ -191,6 +194,11 @@ public class TrainerCertify extends AppCompatActivity {
            // return;
         } else{
             mDatabase.child("Trainer").child(uid).child("UserData").child("Name").setValue(editTextNameString);
+        }
+        if(!TextUtils.isEmpty(editTextIDString) && !TextUtils.isEmpty(editTextNameString)){
+            Intent intentTrainerWaiting = new Intent(TrainerCertify.this, TrainerWaiting.class);
+            startActivity(intentTrainerWaiting);
+            finish();
         }
     }
 }
