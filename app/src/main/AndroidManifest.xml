@@ -27,7 +27,8 @@
             android:name=".StudentMainActivity"
             android:label="@string/title_activity_student_main" />
         <activity android:name=".QuickAsk" />
-        <activity android:name=".TrainerWaiting"></activity>
+        <activity android:name=".TrainerWaiting" />
+        <activity android:name=".TrainerQuickAnswer"></activity>
     </application>
 
 </manifest>

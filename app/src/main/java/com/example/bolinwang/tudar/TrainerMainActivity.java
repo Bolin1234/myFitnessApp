@@ -1,5 +1,6 @@
 package com.example.bolinwang.tudar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 public class TrainerMainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-
+    Button btnQuickAnswer;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -42,10 +43,19 @@ public class TrainerMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trainer_main);
+        btnQuickAnswer = findViewById(R.id.BtnQuickAnswer);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.NavigationTrainer);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        btnQuickAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TrainerMainActivity.this, TrainerQuickAnswer.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     private void articleTrainer(){
         ConstraintLayout layoutAnsTra = findViewById(R.id.LayoutAnsTra);
@@ -74,17 +84,10 @@ public class TrainerMainActivity extends AppCompatActivity {
                 Toast.makeText(TrainerMainActivity.this, "Diet Success", Toast.LENGTH_LONG).show();
             }
         });
-        //Button btnExercise = (Button)findViewById(R.id.BtnExercise);
-        //Button btnChat = (Button)findViewById(R.id.BtnChat);
-        //Button btnVidChat = (Button)findViewById(R.id.BtnVidChat);
-        //Button btnSchedule = (Button)findViewById(R.id.BtnSchedule);
+
 
     }
     private void notificationTrainer(){
-        //  ConstraintLayout layoutNotiTra = findViewById(R.id.layoutNotiTra);
-        //  layoutNotiTra.bringToFront();
-
-
         ConstraintLayout layoutAnsTra = findViewById(R.id.LayoutAnsTra);
         layoutAnsTra.setVisibility(ConstraintLayout.GONE);
         ConstraintLayout layoutPrivTra = findViewById(R.id.LayoutPrivTra);
@@ -93,11 +96,9 @@ public class TrainerMainActivity extends AppCompatActivity {
         layoutNotiTra.setVisibility(ConstraintLayout.VISIBLE);
         ConstraintLayout layoutArtiTra = findViewById(R.id.LayoutArtiTra);
         layoutArtiTra.setVisibility(ConstraintLayout.GONE);
-
     }
     private void answerQuestionTrainer(){
         ConstraintLayout layoutAnsTra = findViewById(R.id.LayoutAnsTra);
-        //layoutAnsTra.bringToFront();
         layoutAnsTra.setVisibility(ConstraintLayout.VISIBLE);
         ConstraintLayout layoutPrivTra = findViewById(R.id.LayoutPrivTra);
         layoutPrivTra.setVisibility(ConstraintLayout.GONE);
