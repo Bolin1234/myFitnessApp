@@ -51,7 +51,7 @@ public class TrainerMainActivity extends AppCompatActivity {
         btnQuickAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TrainerMainActivity.this, TrainerQuickAnswer.class);
+                Intent intent = new Intent(TrainerMainActivity.this, TrainerQuickAnswerRecycler.class);
                 startActivity(intent);
                 finish();
             }
