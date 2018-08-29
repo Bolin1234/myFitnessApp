@@ -141,16 +141,16 @@ public class SignUpLogInActivity extends AppCompatActivity {
                                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                                         String uid = user.getUid();
                                                         if(isStudent){
-                                                            mDatabase.child("Student").child(uid).child("loginInfo").child("isStudent").setValue(true);
-                                                            mDatabase.child("Student").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
-                                                            mDatabase.child("Student").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
+                                                            mDatabase.child("Student").child(uid).child("LoginInfo").child("isStudent").setValue(true);
+                                                            mDatabase.child("Student").child(uid).child("LoginInfo").child("contact").setValue(emailSignUpUpload);
+                                                            mDatabase.child("Student").child(uid).child("LoginInfo").child("password").setValue(passwordSignUpUpload);
                                                             Intent intentSignUp = new Intent(SignUpLogInActivity.this, SignUpInfo.class);
                                                             startActivity(intentSignUp);
                                                         }
                                                         else {
-                                                            mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
-                                                            mDatabase.child("Trainer").child(uid).child("loginInfo").child("contact").setValue(emailSignUpUpload);
-                                                            mDatabase.child("Trainer").child(uid).child("loginInfo").child("password").setValue(passwordSignUpUpload);
+                                                            mDatabase.child("Trainer").child(uid).child("LoginInfo").child("isStudent").setValue(false);
+                                                            mDatabase.child("Trainer").child(uid).child("LoginInfo").child("contact").setValue(emailSignUpUpload);
+                                                            mDatabase.child("Trainer").child(uid).child("LoginInfo").child("password").setValue(passwordSignUpUpload);
                                                             Intent intentTrainerCertify = new Intent(SignUpLogInActivity.this, TrainerCertify.class);
                                                             startActivity(intentTrainerCertify);
                                                         }

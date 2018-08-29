@@ -28,7 +28,8 @@
             android:label="@string/title_activity_student_main" />
         <activity android:name=".QuickAsk" />
         <activity android:name=".TrainerWaiting" />
-        <activity android:name=".SignUpLogInActivity"></activity>
+        <activity android:name=".SignUpLogInActivity" />
+        <activity android:name=".TrainerAnswerQuestionActivity"></activity>
     </application>
 
 </manifest>

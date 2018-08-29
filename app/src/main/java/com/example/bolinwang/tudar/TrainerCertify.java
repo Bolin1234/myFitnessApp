@@ -73,7 +73,7 @@ public class TrainerCertify extends AppCompatActivity {
         if (user != null) {
             uid = user.getUid();
             //check if verified or if info completed
-            mDatabase.child("Trainer").child(uid).child("loginInfo").child("verified").addValueEventListener(new ValueEventListener() {
+            mDatabase.child("Trainer").child(uid).child("LoginInfo").child("verified").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!(dataSnapshot.getValue() == null)) {
@@ -185,10 +185,10 @@ public class TrainerCertify extends AppCompatActivity {
             return;
         } else {
             int editTextIDUpload = Integer.parseInt(editTextIDString);
-            mDatabase.child("Trainer").child(uid).child("loginInfo").child("ID").setValue(editTextIDUpload);
+            mDatabase.child("Trainer").child(uid).child("LoginInfo").child("ID").setValue(editTextIDUpload);
         }
-        mDatabase.child("Trainer").child(uid).child("loginInfo").child("verified").setValue(false);
-        mDatabase.child("Trainer").child(uid).child("loginInfo").child("isStudent").setValue(false);
+        mDatabase.child("Trainer").child(uid).child("LoginInfo").child("verified").setValue(false);
+        mDatabase.child("Trainer").child(uid).child("LoginInfo").child("isStudent").setValue(false);
         if (TextUtils.isEmpty(editTextNameString)) {
             Toast.makeText(getApplicationContext(), "Enter Name!", Toast.LENGTH_SHORT).show();
            // return;

@@ -1,26 +1,29 @@
 package com.example.bolinwang.tudar;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class TrainerQuickAnswerListItem {
-    private String head;
-    private String time;
-    private String desc;
+   // private String head;
+    private Long TimeStamp;
+    private String QuestionContent;
+    private TrainerViewQuestionImageListItem Photos;
+    /*public TrainerQuickAnswerListItem ( String QuestionContent, Long TimeStamp){
+        this.QuestionContent = QuestionContent;
+        this.TimeStamp = TimeStamp;
+    }*/
 
-    public TrainerQuickAnswerListItem (String head, String time, String desc){
-        this.head = head;
-        this.desc = desc;
-        this.time = time;
-    }
-    public String getHead(){
-        return head;
-    }
-
-    public String getDesc(){
-        return desc;
+    public String getQuestionContent(){
+        return QuestionContent;
     }
 
-    public String getTime(){
-        return time;
+    public Long getTimeStamp(){
+        return TimeStamp;
     }
 
-
+    public TrainerViewQuestionImageListItem getPhotos() {
+        return Photos;
+    }
 }

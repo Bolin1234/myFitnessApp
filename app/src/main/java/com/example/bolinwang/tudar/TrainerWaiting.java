@@ -29,7 +29,7 @@ public class TrainerWaiting extends AppCompatActivity {
         if (user != null) {
             uid = user.getUid();
             //check if verified or if info completed
-            mDatabase.child("Trainer").child(uid).child("loginInfo").child("verified").addValueEventListener(new ValueEventListener() {
+            mDatabase.child("Trainer").child(uid).child("LoginInfo").child("verified").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue().toString().equals("true")) {
