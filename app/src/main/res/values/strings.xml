@@ -64,5 +64,9 @@
     <string name="traMainPrivTrainVideoChat">语音视频</string>
     <string name="traMainAnswerEasy">快速回答</string>
 
+    <string name="traViewQuestionBtnAnswer">写回答</string>
+
+    <string name="traAnswerQuestionBtnPublish">发布</string>
+
 
 </resources>

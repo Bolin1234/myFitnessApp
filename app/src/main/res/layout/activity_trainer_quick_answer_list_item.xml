@@ -43,7 +43,7 @@
             <TextView
                 android:id="@+id/textViewQuestionContent"
                 android:layout_width="285dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"

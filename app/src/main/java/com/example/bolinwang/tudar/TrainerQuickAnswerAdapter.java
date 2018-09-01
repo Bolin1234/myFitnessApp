@@ -61,6 +61,8 @@ public class TrainerQuickAnswerAdapter extends RecyclerView.Adapter<TrainerQuick
                 intent.putExtra("Photo1Location", listItem.getPhotos().getPhoto1Location());
                 intent.putExtra("Photo2Location", listItem.getPhotos().getPhoto2Location());
                 intent.putExtra("Photo3Location", listItem.getPhotos().getPhoto3Location());
+                intent.putExtra("QuestionContent", listItem.getQuestionContent());
+                intent.putExtra("TimeStamp", listItem.getTimeStamp().toString());
                 context.startActivity(intent);
 
             }

@@ -10,13 +10,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-//import android.widget.AdapterView;
-//import android.widget.ArrayAdapter;
 import android.widget.Button;
-///import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-//import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -36,7 +32,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.*;
-import java.util.UUID;
 public class TrainerCertify extends AppCompatActivity {
     EditText editTextID;
     EditText editTextName;
@@ -73,7 +68,7 @@ public class TrainerCertify extends AppCompatActivity {
         if (user != null) {
             uid = user.getUid();
             //check if verified or if info completed
-            mDatabase.child("Trainer").child(uid).child("LoginInfo").child("verified").addValueEventListener(new ValueEventListener() {
+            mDatabase.child("Trainer").child(uid).child("LoginInfo").child("Verified").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!(dataSnapshot.getValue() == null)) {
@@ -185,10 +180,22 @@ public class TrainerCertify extends AppCompatActivity {
             return;
         } else {
             int editTextIDUpload = Integer.parseInt(editTextIDString);
-            mDatabase.child("Trainer").child(uid).child("LoginInfo").child("ID").setValue(editTextIDUpload);
+            mDatabase.child("Trainer").child(uid).child("UserData").child("IDNumber").setValue(editTextIDUpload);
         }
         mDatabase.child("Trainer").child(uid).child("LoginInfo").child("verified").setValue(false);
         mDatabase.child("Trainer").child(uid).child("LoginInfo").child("isStudent").setValue(false);
+
+
+/***************************************this section has not been debugged!****************************************************************************/
+        storageReference.child("TrainerCertificationImages/"+ uid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                mDatabase.child("Trainer").child(uid).child("UserData").child("verifyPicLink").setValue(uri.toString());
+            }
+        });
+/********************************************************************************************************************************************************/
+
+
         if (TextUtils.isEmpty(editTextNameString)) {
             Toast.makeText(getApplicationContext(), "Enter Name!", Toast.LENGTH_SHORT).show();
            // return;

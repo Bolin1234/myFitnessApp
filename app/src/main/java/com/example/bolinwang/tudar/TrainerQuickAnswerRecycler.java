@@ -55,15 +55,16 @@ public class TrainerQuickAnswerRecycler extends AppCompatActivity {
         progressDialog.show();
 
         mDatabaseQuestion.child("QuickQuestion").addChildEventListener(new ChildEventListener() {
-            //the first QuickQuestion is madeup for testing only at Firebase!
-            //TrainerQuickAnswerListItem trainerQuickAnswerListItem = new TrainerQuickAnswerListItem();
 
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 TrainerQuickAnswerListItem trainerQuickAnswerListItem = new TrainerQuickAnswerListItem();
                 trainerQuickAnswerListItem = dataSnapshot.getValue(TrainerQuickAnswerListItem.class);
-                listItems.add(trainerQuickAnswerListItem);
-                recyclerView.setAdapter(adapter);
+                if(!trainerQuickAnswerListItem.getIsAnswered()){
+                    listItems.add(trainerQuickAnswerListItem);
+                    recyclerView.setAdapter(adapter);
+                }
+
                 progressDialog.dismiss();
             }
 

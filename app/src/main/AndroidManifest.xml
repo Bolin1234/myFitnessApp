@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TrainerQuickAnswerRecycler">
+        <activity android:name=".SignUpLogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +28,9 @@
             android:label="@string/title_activity_student_main" />
         <activity android:name=".QuickAsk" />
         <activity android:name=".TrainerWaiting" />
-        <activity android:name=".SignUpLogInActivity" />
-        <activity android:name=".TrainerAnswerQuestionActivity"></activity>
+        <activity android:name=".TrainerQuickAnswerRecycler" />
+        <activity android:name=".TrainerAnswerQuestionActivity" />
+        <activity android:name=".TrainerAnswerQuestionWriteActivity"></activity>
     </application>
 
 </manifest>
