@@ -30,7 +30,10 @@
         <activity android:name=".TrainerWaiting" />
         <activity android:name=".TrainerQuickAnswerRecycler" />
         <activity android:name=".TrainerAnswerQuestionActivity" />
-        <activity android:name=".TrainerAnswerQuestionWriteActivity"></activity>
+        <activity android:name=".TrainerAnswerQuestionWriteActivity" />
+        <activity android:name=".TrainerProfileEdit" />
+        <activity android:name=".TrainerChangeName" />
+        <activity android:name=".TrainerChangeProfilePic"></activity>
     </application>
 
 </manifest>

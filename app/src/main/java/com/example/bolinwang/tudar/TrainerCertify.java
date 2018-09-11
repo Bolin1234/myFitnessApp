@@ -186,14 +186,12 @@ public class TrainerCertify extends AppCompatActivity {
         mDatabase.child("Trainer").child(uid).child("LoginInfo").child("isStudent").setValue(false);
 
 
-/***************************************this section has not been debugged!****************************************************************************/
         storageReference.child("TrainerCertificationImages/"+ uid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 mDatabase.child("Trainer").child(uid).child("UserData").child("verifyPicLink").setValue(uri.toString());
             }
         });
-/********************************************************************************************************************************************************/
 
 
         if (TextUtils.isEmpty(editTextNameString)) {

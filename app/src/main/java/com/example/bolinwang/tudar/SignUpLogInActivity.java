@@ -54,10 +54,10 @@ public class SignUpLogInActivity extends AppCompatActivity {
             checkIdentity();              //note here we prevent auto login
         }
 
-        emailSignUp = (EditText) findViewById(R.id.EmailSignUp);
-        passwordSignUp = (EditText) findViewById(R.id.PasswordSignUp);
-        signUpButton = (Button) findViewById(R.id.SignUpButton);
-        logInButton = (Button) findViewById(R.id.LogInButton);
+        emailSignUp =  findViewById(R.id.EmailSignUp);
+        passwordSignUp = findViewById(R.id.PasswordSignUp);
+        signUpButton = findViewById(R.id.SignUpButton);
+        logInButton = findViewById(R.id.LogInButton);
         spinnerIsStudent();
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +173,7 @@ public class SignUpLogInActivity extends AppCompatActivity {
         });
     }
     public void spinnerIsStudent(){
-        final Spinner spinnerIsStudent = (Spinner) findViewById(R.id.SpinnerIsStudent);
+        final Spinner spinnerIsStudent = findViewById(R.id.SpinnerIsStudent);
         //spinner adapter
         adapter = ArrayAdapter.createFromResource(this, R.array.IsStudentArray, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
